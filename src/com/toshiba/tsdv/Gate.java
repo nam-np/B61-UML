@@ -15,9 +15,9 @@ public class Gate {
 			//A
 			ticket.setOrigin(this);
 			open();  
-			} else {  
-				close();  
-			}  
+		} else {  
+			close();  
+		}  
 		
 	}
 	
@@ -25,22 +25,28 @@ public class Gate {
 		Gate origin = ticket.getOrigin();  
 		if (origin != null) {  
 			int d = Math.abs(origin.distance - distance); 
-			int fare = Line.getFare(d);  
+			int fare = Line.getFare(d);
+			System.out.println("Fare: " +fare);
 			//B
-			if (ticket.isValid()) { 
+			if (ticket.isValid() && ticket.getValue()>=fare) { 
 				ticket.adjustValue(fare); 
 				ticket.setOrigin(null);  
-				open();  
+				open(); 
+				System.out.println();
 				return;  
 			}  
-		}  close();  
+		}  
+		close();
+		System.out.println();
+		
 	}  
 	
 	private void open() {  
-		System.out.println(name + ": open");  }  
-	
+		System.out.println(name + ": open");  
+	}  
+		
 	private void close() {  
-		System.out.println(name + ": closed");  
+		System.out.println(name + ": closed");
 	}
 }
 
